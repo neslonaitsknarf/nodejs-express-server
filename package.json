@@ -20,14 +20,13 @@
   },
   "homepage": "https://github.com/neslonaitsknarf/nodejs-express-server#readme",
   "dependencies": {
-    "body-parser": "^1.18.2", /*Parse incoming request bodies in a middleware before your handlers */
-    "cookie-parser": "^1.4.3", /* Parse Cookie header and populate req.cookies with an object keyed by the cookie names */
-    "express": "^4.16.2", /* Fast, unopinionated, minimalist web framework for node. */
-    "morgan": "^1.9.0", /* HTTP request logger middleware for node.js */
-    "multer": "^1.3.0", /* Middleware for handling multipart/form-data */
-    "path": "^0.12.7", /* The path module provides utilities for working with file and directory paths */
-    "rotating-file-stream": "^1.3.2" /* Opens a stream.Writable to a file rotated by interval and/or size. A logrotate alternative. */
-    //compression /* Node.js compression middleware(gzip, deflate) */
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "path": "^0.12.7",
+    "rotating-file-stream": "^1.3.2"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

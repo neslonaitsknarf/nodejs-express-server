@@ -8,9 +8,6 @@ var rfs = require('rotating-file-stream')
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// Local routes modules
-var birds = require('./routes/birds')
-
 // Constants
 const request = require('request');
 // ensure log directory exists
@@ -31,28 +28,56 @@ app.get('/', function (req, res) {
    res.send('Hello World og Humans and droids are you there');
 })
 
-// Example for using Jsonplaceholder External Fake Online REST API for Testing and Prototyping
-// fetches from specified url argument
-/*const options = {
-    url: 'https://jsonplaceholder.typicode.com/posts',
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8'
-    }
-};
+// configure app to use bodyParser() in case of HTML form input
+// this will let us get the data from a POST
+/*app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());*/
 
-app.get("/api/allposts", function(req, res)  {
-        request(options, function(err, output, body) {
-        var json = JSON.parse(body);
-        console.log(json); // Logging the output within the request function
-        res.json(json) //then returning the response.. The request.json is empty over here
-		}); //closing the request function
+var port = process.env.PORT || 8081;        // set our port
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+var router = express.Router();
+
+
+ // Example for using Jsonplaceholder External Fake Online REST API for Testing and Prototyping
+ // fetches from specified url argument
+ const options = {
+     url: 'https://jsonplaceholder.typicode.com/posts',
+     method: 'GET',
+     headers: {
+         'Accept': 'application/json',
+         'Accept-Charset': 'utf-8'
+     }
+ };
+
+// get all the users (accessed at GET http://localhost:8080/api/users)
+router.route('/users')
+    .get(function(req, res) {
+         request(options, function(err, output, body) { //get fake test data
+            if (err)
+            res.send(err);
+            var json = JSON.parse(body);
+            console.log(json); // Logging the output within the request function
+            res.json(json) //then returning the response.. The request.json is empty over here
+    		}); //closing the request function
     });
-*/
 
-//uses birds routes from /routes/birds.js
-app.use('/birds', birds);
+
+app.use('/api', router);
+
+// middleware to use for all requests
+router.use(function(req, res, next) {
+    // do logging
+    console.log('Something is happening.');
+    next(); // make sure we go to the next routes and don't stop here
+});
+
+// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+router.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });
+});
+
 
 // catch 403 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,9 +104,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status).jsonp({ error: res.locals.message});
 });
 
-var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
+var server = app.listen(port, function () {
 
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("Example app listening at http://localhost/", port)
 });

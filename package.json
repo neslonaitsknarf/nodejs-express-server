@@ -4,7 +4,10 @@
   "description": "Starter template nodejs express server",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-express-server": "node server.js",
+    "devstart-express-server": "nodemon server.js",
+    "start-restify-server": "node restify-server.js",
+    "devstart-restify-server": "nodemon restify-server.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +20,16 @@
   },
   "homepage": "https://github.com/neslonaitsknarf/nodejs-express-server#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
-    "multer": "^1.3.0"
+    "body-parser": "^1.18.2", /*Parse incoming request bodies in a middleware before your handlers */
+    "cookie-parser": "^1.4.3", /* Parse Cookie header and populate req.cookies with an object keyed by the cookie names */
+    "express": "^4.16.2", /* Fast, unopinionated, minimalist web framework for node. */
+    "morgan": "^1.9.0", /* HTTP request logger middleware for node.js */
+    "multer": "^1.3.0", /* Middleware for handling multipart/form-data */
+    "path": "^0.12.7", /* The path module provides utilities for working with file and directory paths */
+    "rotating-file-stream": "^1.3.2" /* Opens a stream.Writable to a file rotated by interval and/or size. A logrotate alternative. */
+    //compression /* Node.js compression middleware(gzip, deflate) */
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }

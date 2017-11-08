@@ -21,6 +21,8 @@ path: The path module provides utilities for working with file and directory pat
 
 rotating-file-stream: Opens a stream.Writable to a file rotated by interval and/or size. A logrotate alternative.
 
+bunyan: Configurable logging instead of console.log
+
 NOT IMPLEMENTED! compression: Node.js compression middleware(gzip, deflate)
 
 NOT IMPLEMENTED! debug: A tiny node debugging utility modelled after node core's debugging technique.

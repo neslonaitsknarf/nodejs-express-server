@@ -8,6 +8,9 @@ var rfs = require('rotating-file-stream')
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var customRouter = require('./routes/router.js');
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({name: 'nodejs-express-server-server.js'});
+
 
 // configuration for listening port
 const port = process.env.PORT || 8081; // set our port
@@ -43,5 +46,5 @@ app.use('/api', customRouter);
 
 var server = app.listen(port, function () {
 
-   console.log("Example app listening at http://localhost/", port)
+   console.log("Express Server app listening at http://localhost/", port)
 });

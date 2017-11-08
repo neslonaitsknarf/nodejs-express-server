@@ -1,14 +1,20 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({name: 'nodejs-express-server-router.js'});
+//var compression = require('compression')
 // CONSTANTS
 const request = require('request');
+
+// compress all responses
+//router.use(compression())
 
 // MIDDLEWARE FOR ALL ROUTES IN THIS ROUTER
 // must be specified before all routes
 router.use(function timeLog (req, res, next) {
   d = new Date();
-  console.log('API access Time: ', d.toLocaleString());
+  log.info('API access Time: ', d.toLocaleString());
   next()
 })
 
@@ -35,7 +41,7 @@ router.get('/users', function(req, res) {
             if (err)
             res.send(err);
             var json = JSON.parse(body);
-           // console.log(json); // Logging the output within the request function
+            log.info(json); // Logging the output within the request function
             res.json(json) //then returning the response.. The request.json is empty over here
     		}); //closing the request function
     });
